@@ -3,21 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Hub</title>
+    <title>WinOS Game Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>My Game Collection</h1>
-    </header>
+    <div id="desktop" class="desktop-grid">
+        </div>
 
-    <main id="game-grid" class="grid"></main>
+    <div id="window-container" class="window-hidden">
+        <div class="window-frame">
+            <div class="window-header">
+                <div class="window-title">
+                    <span id="current-game-icon">🎮</span>
+                    <span id="current-game-name">Game Player</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn">─</button>
+                    <button class="win-btn">▢</button>
+                    <button class="win-btn close" onclick="closeGame()">✕</button>
+                </div>
+            </div>
+            <div class="window-body">
+                <iframe id="game-frame" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
 
-    <div id="game-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times; Close Game</span>
-            <iframe id="game-frame" src="" frameborder="0"></iframe>
+    <div id="taskbar">
+        <div class="taskbar-container">
+            <div class="taskbar-item start-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Windows_11_logo.svg" alt="Start">
+            </div>
+            
+            <div class="taskbar-item">
+                <img src="https://img.icons8.com/color/48/search--v1.png" alt="Search">
+            </div>
+
+            <div id="active-game-task" class="taskbar-item hidden">
+                <div class="active-indicator"></div>
+                <span id="task-icon">🎮</span>
+            </div>
+
+            <div class="taskbar-item">
+                <img src="https://img.icons8.com/color/48/folder-invoices--v1.png" alt="Files">
+            </div>
+            
+            <div class="taskbar-item">
+                <img src="https://img.icons8.com/color/48/microsoft-edge-insider.png" alt="Browser">
+            </div>
+        </div>
+
+        <div class="system-tray">
+            <div class="tray-icons">
+                <span>🌐</span>
+                <span>🔊</span>
+                <span>🔋</span>
+            </div>
+            <div class="clock" id="clock">12:00 PM</div>
         </div>
     </div>
 
