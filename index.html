@@ -1,83 +1,49 @@
-const grid = document.getElementById("games-grid");
-const player = document.getElementById("player");
-const frame = document.getElementById("game-frame");
-const exitBtn = document.getElementById("exit-btn");
-const searchInput = document.getElementById("search");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-// View and Nav elements
-const homeScreen = document.getElementById("home-screen");
-const gamesScreen = document.getElementById("games-screen");
-const navHome = document.getElementById("nav-home");
-const navGames = document.getElementById("nav-games");
+<title>mathOS Games</title> <!-- Changed title to mathOS -->
 
-let allGames = []; // Global array to store games for searching
+<link rel="stylesheet" href="style.css">
 
-fetch("games.json")
-.then(res => res.json())
-.then(data => {
-    // Flatten the JSON list so we can search through it easily
-    data.forEach(item => {
-        if(item.type === "folder"){
-            item.items.forEach(game => allGames.push(game));
-        } else {
-            allGames.push(item);
-        }
-    });
-    
-    // Load initial grid
-    loadItems(allGames);
-});
+</head>
+<body>
 
-function loadItems(items){
-    grid.innerHTML = "";
-    items.forEach(game => createGame(game));
-}
+<div id="background"></div>
 
-function createGame(game){
-    const card = document.createElement("div");
-    card.className = "game";
+<div id="main-container">
 
-    card.innerHTML = `
-    <img src="${game.icon}">
-    <span>${game.title}</span>
-    `;
+    <div id="sidebar">
+        <!-- Ensure these icon paths are correct and icons exist -->
+        <div class="sidebar-icon active"><a href="#"><img src="icons/home.svg" alt="Home"></a></div>
+        <div class="sidebar-icon"><a href="#"><img src="icons/controller.svg" alt="Games"></a></div>
+        <div class="sidebar-icon"><a href="#"><img src="icons/discord.svg" alt="Discord"></a></div>
+        <!-- Add more sidebar icons as needed -->
+    </div>
 
-    card.onclick = () => openGame(game);
-    grid.appendChild(card);
-}
+    <div id="content-wrapper">
 
-// Search functionality
-searchInput.addEventListener("input", (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filteredGames = allGames.filter(game => 
-        game.title.toLowerCase().includes(searchTerm)
-    );
-    loadItems(filteredGames);
-});
+        <div id="header">
+            <h1 class="main-title">mathOS</h1> <!-- Changed main title to mathOS -->
+            <div id="search-container">
+                <input type="text" id="game-search" placeholder="search games...">
+            </div>
+        </div>
 
-// Sidebar Navigation functionality
-navHome.onclick = () => {
-    homeScreen.classList.remove("hidden");
-    gamesScreen.classList.add("hidden");
-    navHome.classList.add("active");
-    navGames.classList.remove("active");
-};
+        <div id="games-grid"></div>
 
-navGames.onclick = () => {
-    homeScreen.classList.add("hidden");
-    gamesScreen.classList.remove("hidden");
-    navHome.classList.remove("active");
-    navGames.classList.add("active");
-};
+    </div>
 
-function openGame(game){
-    player.classList.remove("hidden");
-    frame.src = `html/${game.file}`;
-    document.body.style.overflow = "hidden";
-}
+</div>
 
-exitBtn.onclick = () => {
-    frame.src = "";
-    player.classList.add("hidden");
-    document.body.style.overflow = "auto";
-}
+<div id="player" class="hidden">
+    <button id="exit-btn">EXIT GAME</button>
+    <iframe id="game-frame"></iframe>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
