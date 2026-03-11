@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mathOS Games</title> <!-- Changed title to mathOS -->
+<title>mathOS</title>
+
+<!-- Modern Tech/OS Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <link rel="stylesheet" href="style.css">
 
@@ -13,34 +17,39 @@
 
 <div id="background"></div>
 
-<div id="main-container">
+<!-- Sidebar Navigation -->
+<div id="sidebar">
+    <button id="nav-home" class="active"><i class="fa-solid fa-house"></i></button>
+    <button id="nav-games"><i class="fa-solid fa-gamepad"></i></button>
+    <button id="nav-discord"><i class="fa-brands fa-discord"></i></button>
+</div>
 
-    <div id="sidebar">
-        <!-- Ensure these icon paths are correct and icons exist -->
-        <div class="sidebar-icon active"><a href="#"><img src="icons/home.svg" alt="Home"></a></div>
-        <div class="sidebar-icon"><a href="#"><img src="icons/controller.svg" alt="Games"></a></div>
-        <div class="sidebar-icon"><a href="#"><img src="icons/discord.svg" alt="Discord"></a></div>
-        <!-- Add more sidebar icons as needed -->
+<div id="main-content">
+    
+    <!-- Home Screen -->
+    <div id="home-screen">
+        <h1 class="logo glow">mathOS</h1>
+        <p class="sublink">System v1.0 // Initialized</p>
     </div>
 
-    <div id="content-wrapper">
-
-        <div id="header">
-            <h1 class="main-title">mathOS</h1> <!-- Changed main title to mathOS -->
-            <div id="search-container">
-                <input type="text" id="game-search" placeholder="search games...">
-            </div>
+    <!-- Games Menu -->
+    <div id="games-screen" class="hidden">
+        <h1 class="logo glow">mathOS | games</h1>
+        
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Search library...">
         </div>
 
         <div id="games-grid"></div>
-
     </div>
 
 </div>
 
+<!-- Game Player -->
 <div id="player" class="hidden">
-    <button id="exit-btn">EXIT GAME</button>
-    <iframe id="game-frame"></iframe>
+    <button id="exit-btn"><i class="fa-solid fa-arrow-left"></i> EXIT SYSTEM</button>
+    <!-- Added allowfullscreen and background styling to fix black screen -->
+    <iframe id="game-frame" allowfullscreen="true"></iframe>
 </div>
 
 <script src="script.js"></script>
