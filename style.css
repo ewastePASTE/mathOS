@@ -1,84 +1,62 @@
 :root {
-    --glass: rgba(28, 28, 28, 0.75);
+    --glass: rgba(20, 20, 20, 0.7);
     --hover: rgba(255, 255, 255, 0.1);
 }
 
 body {
     margin: 0; padding: 0; height: 100vh;
-    background: url('https://images.wallpapersden.com/image/download/windows-11-dark-mode-blue-bloom_hWlpZ2mUmZqaraWkpJRmbmdlrWdtbW0.jpg') center/cover;
-    font-family: 'Segoe UI', sans-serif;
+    /* Your requested Background */
+    background: url('https://windowswallpaper.miraheze.org/w/index.php?curid=1365') center/cover no-repeat;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
 }
 
-/* Desktop Icon Grid - Vertical Columns on Left */
 #desktop {
     display: grid;
-    grid-template-rows: repeat(auto-fill, 95px);
-    grid-auto-flow: column;
-    grid-template-columns: repeat(auto-fill, 85px);
-    gap: 10px; padding: 20px;
+    grid-template-rows: repeat(auto-fill, 90px);
+    grid-auto-flow: column; /* This forces icons to fill vertically first */
+    grid-template-columns: repeat(auto-fill, 80px);
+    gap: 15px; padding: 20px;
     height: calc(100vh - 60px);
+    width: fit-content;
 }
 
 .icon {
-    width: 80px; height: 90px;
+    width: 75px; height: 85px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    border: 1px solid transparent; border-radius: 4px;
-    cursor: pointer; transition: 0.1s;
+    border-radius: 4px; cursor: pointer; transition: background 0.2s;
 }
 
-.icon:hover { background: var(--hover); border-color: rgba(255,255,255,0.1); }
+.icon:hover { background: var(--hover); }
+.icon img { width: 40px; height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+.icon span { color: white; font-size: 11px; margin-top: 5px; text-shadow: 0 1px 3px black; text-align: center; }
 
-.icon img { width: 42px; height: 42px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
-
-.icon span {
-    color: white; font-size: 11px; margin-top: 6px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.9); text-align: center;
-}
-
-/* Windows App Window */
 #app-window {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     width: 90%; height: 85%;
-    background: #1c1c1c; border: 1px solid #444; border-radius: 12px;
-    display: none; flex-direction: column; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    background: #1c1c1c; border: 1px solid #444; border-radius: 10px;
+    display: none; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.7);
     z-index: 1000; overflow: hidden;
 }
 
-.window-header {
-    background: rgba(0,0,0,0.3); padding: 10px 15px;
-    display: flex; justify-content: space-between; align-items: center; color: white;
-}
-
-.header-left { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.window-header { background: rgba(0,0,0,0.4); padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; color: white; }
+.header-left { display: flex; align-items: center; gap: 8px; font-size: 13px; }
 .header-left img { width: 16px; height: 16px; }
 
-.win-control { background: none; border: none; color: white; padding: 6px 14px; cursor: pointer; }
+.win-control { background: none; border: none; color: white; padding: 5px 12px; cursor: pointer; }
 .win-control.close:hover { background: #e81123; }
 
-.window-content { flex: 1; background: black; }
-iframe { width: 100%; height: 100%; border: none; }
+.window-content { flex: 1; }
+iframe { width: 100%; height: 100%; border: none; background: white; }
 
-/* Centered Taskbar */
-#taskbar {
-    position: fixed; bottom: 0; width: 100%; height: 48px;
-    background: var(--glass); backdrop-filter: blur(20px);
-    display: flex; align-items: center; z-index: 9999;
-}
-
-.tb-center {
-    position: absolute; left: 50%; transform: translateX(-50%);
-    display: flex; align-items: center; gap: 4px;
-}
-
-.tb-icon { width: 28px; height: 28px; padding: 7px; border-radius: 4px; transition: 0.2s; cursor: pointer; }
-.tb-icon:hover { background: var(--hover); transform: scale(1.1); }
+#taskbar { position: fixed; bottom: 0; width: 100%; height: 48px; background: var(--glass); backdrop-filter: blur(20px); display: flex; align-items: center; z-index: 9999; }
+.tb-center { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 2px; }
+.tb-icon { width: 26px; height: 26px; padding: 8px; border-radius: 5px; cursor: pointer; transition: 0.2s; }
+.tb-icon:hover { background: var(--hover); }
 
 .active-app-container { display: flex; flex-direction: column; align-items: center; }
-.active-dot { width: 6px; height: 3px; background: #00a2ff; border-radius: 4px; margin-top: -4px; }
+.active-dot { width: 6px; height: 3px; background: #00a2ff; border-radius: 2px; margin-top: -4px; }
 
 .tb-right { margin-left: auto; display: flex; align-items: center; padding-right: 15px; color: white; font-size: 12px; }
-.tray { margin-right: 15px; letter-spacing: 5px; opacity: 0.8; }
-.clock-group { text-align: right; line-height: 1.2; }
-
+.clock-group { text-align: right; line-height: 1.1; margin-left: 15px; }
 .hidden { display: none; }
