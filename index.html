@@ -3,79 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathOS</title>
+    <title>mathOS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="desktop" class="desktop-grid">
+    <div id="desktop">
         </div>
 
-    <div id="window-container" class="window-hidden">
-        <div class="window-frame">
-            <div class="window-header">
-                <div class="window-title">
-                    <span id="current-game-icon">🎮</span>
-                    <span id="current-game-name">Game Player</span>
-                </div>
-                <div class="window-controls">
-                    <button class="win-btn">─</button>
-                    <button class="win-btn">▢</button>
-                    <button class="win-btn close" onclick="closeGame()">✕</button>
-                </div>
+    <div id="app-window" class="win-hidden">
+        <div class="window-header">
+            <div class="header-left">
+                <img id="active-window-icon" src="" alt="">
+                <span id="active-window-title">App</span>
             </div>
-            <div class="window-body">
-                <iframe id="game-frame" src="" frameborder="0"></iframe>
+            <div class="header-right">
+                <button class="win-control">─</button>
+                <button class="win-control">▢</button>
+                <button class="win-control close" onclick="closeApp()">✕</button>
             </div>
+        </div>
+        <div class="window-content">
+            <iframe id="app-iframe" src=""></iframe>
         </div>
     </div>
 
-<div id="taskbar">
-    <div class="tb-center">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Windows_11_logo.svg" class="tb-icon" title="Start">
-        <img src="https://img.icons8.com/color/48/search--v1.png" class="tb-icon" title="Search">
-        <img src="https://img.icons8.com/fluency/48/settings.png" class="tb-icon" title="Settings">
-        <img src="https://img.icons8.com/color/48/folder-invoices--v1.png" class="tb-icon" title="File Explorer">
-        <img src="https://img.icons8.com/color/48/microsoft-edge-insider.png" class="tb-icon" title="Browser">
-        <img src="https://img.icons8.com/color/48/microsoft-store.png" class="tb-icon" title="Microsoft Store">
-        <img src="https://img.icons8.com/color/48/spotify--v1.png" class="tb-icon" title="Spotify">
-        
-        <div id="active-game-indicator" class="active-app hidden">
-            <div class="active-dot"></div>
-            <img id="active-app-img" src="" class="tb-icon">
-        </div>
-    </div>
-    
-    <div class="tb-right">
-        <div class="tray-icons"><span>∧</span> <span>🌐</span> <span>🔊</span> <span>🔋</span></div>
-        <div class="clock-area">
-            <div id="clock-time">--:--</div>
-            <div id="clock-date">--/--/----</div>
-        </div>
-    </div>
-</div>
-
-            <div id="active-game-task" class="taskbar-item hidden">
-                <div class="active-indicator"></div>
-                <span id="task-icon">🎮</span>
-            </div>
-
-            <div class="taskbar-item">
-                <img src="https://img.icons8.com/color/48/folder-invoices--v1.png" alt="Files">
-            </div>
+    <div id="taskbar">
+        <div class="tb-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Windows_11_logo.svg" class="tb-icon" alt="Start">
+            <img src="https://img.icons8.com/color/48/search--v1.png" class="tb-icon">
+            <img src="https://img.icons8.com/fluency/48/settings.png" class="tb-icon">
+            <img src="https://img.icons8.com/color/48/folder-invoices--v1.png" class="tb-icon">
+            <img src="https://img.icons8.com/color/48/microsoft-edge-insider.png" class="tb-icon">
+            <img src="https://img.icons8.com/color/48/microsoft-store.png" class="tb-icon">
+            <img src="https://img.icons8.com/color/48/spotify--v1.png" class="tb-icon">
             
-            <div class="taskbar-item">
-                <img src="https://img.icons8.com/color/48/microsoft-edge-insider.png" alt="Browser">
+            <div id="active-indicator" class="active-app-container hidden">
+                <img id="tb-active-icon" src="" class="tb-icon">
+                <div class="active-dot"></div>
             </div>
         </div>
 
-        <div class="system-tray">
-            <div class="tray-icons">
-                <span>🌐</span>
-                <span>🔊</span>
-                <span>🔋</span>
+        <div class="tb-right">
+            <div class="tray">∧ 🌐 🔊 🔋</div>
+            <div class="clock-group">
+                <div id="time">12:00 PM</div>
+                <div id="date">03/11/2026</div>
             </div>
-            <div class="clock" id="clock">12:00 PM</div>
         </div>
     </div>
 
