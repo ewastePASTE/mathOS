@@ -1,57 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+const grid = document.getElementById("games-grid");
+const player = document.getElementById("player");
+const frame = document.getElementById("game-frame");
+const exitBtn = document.getElementById("exit-btn");
+const searchInput = document.getElementById("search");
 
-<title>wither. games</title>
+// View and Nav elements
+const homeScreen = document.getElementById("home-screen");
+const gamesScreen = document.getElementById("games-screen");
+const navHome = document.getElementById("nav-home");
+const navGames = document.getElementById("nav-games");
 
-<!-- Fonts and Icons to match the screenshot -->
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+let allGames = []; // Global array to store games for searching
 
-<link rel="stylesheet" href="style.css">
-
-</head>
-<body>
-
-<div id="background"></div>
-
-<!-- Sidebar Navigation -->
-<div id="sidebar">
-    <button id="nav-home" class="active"><i class="fa-solid fa-house"></i></button>
-    <button id="nav-games"><i class="fa-solid fa-gamepad"></i></button>
-    <button id="nav-discord"><i class="fa-brands fa-discord"></i></button>
-</div>
-
-<div id="main-content">
+fetch("games.json")
+.then(res => res.json())
+.then(data => {
+    // Flatten the JSON list so we can search through it easily
+    data.forEach(item => {
+        if(item.type === "folder"){
+            item.items.forEach(game => allGames.push(game));
+        } else {
+            allGames.push(item);
+        }
+    });
     
-    <!-- Home Screen (Screenshot 1) -->
-    <div id="home-screen">
-        <h1 class="logo glow">wither.</h1>
-        <a href="https://fmhy.net" target="_blank" class="sublink">fmhy.net</a>
-    </div>
+    // Load initial grid
+    loadItems(allGames);
+});
 
-    <!-- Games Menu (Screenshot 2) -->
-    <div id="games-screen" class="hidden">
-        <h1 class="logo glow">wither | games</h1>
-        
-        <div class="search-box">
-            <input type="text" id="search" placeholder="search games...">
-        </div>
+function loadItems(items){
+    grid.innerHTML = "";
+    items.forEach(game => createGame(game));
+}
 
-        <div id="games-grid"></div>
-    </div>
+function createGame(game){
+    const card = document.createElement("div");
+    card.className = "game";
 
-</div>
+    card.innerHTML = `
+    <img src="${game.icon}">
+    <span>${game.title}</span>
+    `;
 
-<!-- Game Player -->
-<div id="player" class="hidden">
-    <button id="exit-btn">EXIT GAME</button>
-    <iframe id="game-frame"></iframe>
-</div>
+    card.onclick = () => openGame(game);
+    grid.appendChild(card);
+}
 
-<script src="script.js"></script>
+// Search functionality
+searchInput.addEventListener("input", (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredGames = allGames.filter(game => 
+        game.title.toLowerCase().includes(searchTerm)
+    );
+    loadItems(filteredGames);
+});
 
-</body>
-</html>
+// Sidebar Navigation functionality
+navHome.onclick = () => {
+    homeScreen.classList.remove("hidden");
+    gamesScreen.classList.add("hidden");
+    navHome.classList.add("active");
+    navGames.classList.remove("active");
+};
+
+navGames.onclick = () => {
+    homeScreen.classList.add("hidden");
+    gamesScreen.classList.remove("hidden");
+    navHome.classList.remove("active");
+    navGames.classList.add("active");
+};
+
+function openGame(game){
+    player.classList.remove("hidden");
+    frame.src = `html/${game.file}`;
+    document.body.style.overflow = "hidden";
+}
+
+exitBtn.onclick = () => {
+    frame.src = "";
+    player.classList.add("hidden");
+    document.body.style.overflow = "auto";
+}
