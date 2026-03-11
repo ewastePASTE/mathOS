@@ -29,7 +29,15 @@ fetch("games.json")
 
 function loadItems(items){
     grid.innerHTML = "";
-    items.forEach(game => createGame(game));
+    items.forEach((game, index) => {
+        const card = createGame(game);
+        
+        // Staggered pop in animation
+        setTimeout(() => {
+            card.classList.add('show')
+        }, index * 25);
+
+    });
 }
 
 function createGame(game){
@@ -43,6 +51,8 @@ function createGame(game){
 
     card.onclick = () => openGame(game);
     grid.appendChild(card);
+    
+    return card;
 }
 
 // Search Feature
